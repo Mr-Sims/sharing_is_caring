@@ -1,0 +1,30 @@
+{% extends 'shared/base.html' %}
+{% block body %}
+    <div class="container" style="background-color: chartreuse">
+    <h1 class="display-4">Welcome to Sharing is carng</h1>
+        <div class="jumbotron parent" style="background-color: green">
+            <img style="width: 100%"
+                 src="https://www.vippng.com/png/detail/388-3888357_bebs-cute-baby-stuff-vectors.png" alt="">
+            <div class="absolute">
+                <hr class="my-4">
+                <div class="inner cover">
+                    <h1 class="cover-heading"></h1>
+{#                    {% if not request.user.is_authenticated %}#}
+{#                        <div class="row">#}
+{#                            <div class="col-lg-6">#}
+{#                                <p class="lead">Already have an account? <br><a href="{% url 'log in user' %}"#}
+{#                                                                                class="btn btn-lg btn-secondary">Log#}
+{#                                    in</a></p>#}
+{#                            </div>#}
+{#                            <div class="col-lg-6">#}
+{#                                <p class="lead"> Do not have an account? <br>#}
+{#                                    <a href="{% url 'register user' %}" class="btn btn-lg btn-secondary">Register</a>#}
+{#                                </p>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    {% endif %}#}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
