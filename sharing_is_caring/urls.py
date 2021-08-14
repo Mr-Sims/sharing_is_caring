@@ -5,6 +5,10 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('sharing_is_caring.user_auth.urls')),
+
+    path('', include('sharing_is_caring.common.urls')),
+    path('auth/', include('sharing_is_caring.user_auth.urls')),
+    path('profiles/', include('sharing_is_caring.profiles.urls')),
+
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

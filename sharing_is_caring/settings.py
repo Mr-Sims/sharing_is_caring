@@ -1,6 +1,9 @@
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+from django.conf.global_settings import LOGIN_REDIRECT_URL
+from django.urls import reverse_lazy
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -27,6 +30,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'sharing_is_caring.user_auth',
+    'sharing_is_caring.profiles',
+    'sharing_is_caring.common',
 ]
 
 MIDDLEWARE = [
@@ -123,3 +128,5 @@ MEDIA_ROOT = BASE_DIR / 'media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'user_auth.SharingIsCaringUser'
+
+LOGIN_REDIRECT_URL = reverse_lazy('index')

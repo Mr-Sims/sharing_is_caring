@@ -1,0 +1,24 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+
+{% block title %}- Profile Details{% endblock %}
+
+{% block body %}
+    <div class="container" style="background-color: green">
+        <h1 class="display-4" style="color: chartreuse">Profile Details</h1>
+        <div class="text-center" style="margin: 3% 5%; padding: 5% 5%; background-color: chartreuse">
+            <div class="absolute">
+               <div >
+            {% if user.profile.image %}
+                <img src="{{ user.profile.image.url }}" alt="image">
+            {% else %}
+                <img src="{% static 'images/generic_woman_profile_image.png' %}" alt="profile image">
+            {% endif %}
+            </div>
+
+        </div>
+        <hr>
+    </div>
+    </div>
+
+{% endblock %}

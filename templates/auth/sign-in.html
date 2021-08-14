@@ -1,0 +1,20 @@
+{% extends 'shared/base.html' %}
+
+{% block title %}- Sign in{% endblock %}
+{% block body %}
+    <div class="container-fluid" style="background-image: none">
+        <div class="row">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-6">
+                <form method="post" action="{% url 'sign in' %}" class="furniture-form"
+                      style="border: 3px solid grey; margin: 3% 5%; padding: 5% 5%; background-color: chartreuse">
+                    <h2>Sign in with your credentials</h2>
+                    <p></p>
+                    {% csrf_token %}
+                    {{ form }}
+                    <button class="btn btn-primary center">Sign In</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

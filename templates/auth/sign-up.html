@@ -1,19 +1,24 @@
 {% extends 'shared/base.html' %}
 
+{% block title %}- Sign up{% endblock %}
 {% block body %}
-<div class="container-fluid" style="background-image: none">
-    <div class="row">
-    <div class="col-lg-3"></div>
-    <div class="col-lg-6">
-          <form style="border: 1px solid grey; margin: 10% 0%; padding: 10% 5%" method="post">
-            <h2>Sign up</h2>
 
-            <button class="btn btn-primary" type="submit">Register</button>
-            <span>Have an account?<a href="{% url 'log in user' %}" style="color:orange">Log in here</a></span>
-          </form>
-    </div>
-    <div class="col-lg-3"></div>
+    <div class="container-fluid" style="background-image: none">
+        <div class="row">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-6">
+                <form class="furniture-form"
+                      style="border: 3px solid grey; margin: 3% 5%; padding: 5% 5%; background-color: chartreuse"
+                      method="post" action="{% url 'sign up' %}">
+                    <h2>Sign up so we can get started!</h2>
+                    <p></p>
+                    {% csrf_token %}
+                    {{ form }}
+                    <button class="btn btn-primary" type="submit">Sign up</button>
+                </form>
+            </div>
+
         </div>
-</div>
+    </div>
 
 {% endblock %}
