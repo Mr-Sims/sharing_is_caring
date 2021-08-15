@@ -8,6 +8,7 @@ class UserProfileDetailsView(DetailView):
     model = UserProfile
     template_name = 'profile/profile_details.html'
     context_object_name = 'profile'
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         # context['pets'] = Pet.objects.filter(user_id=self.request.user.id)

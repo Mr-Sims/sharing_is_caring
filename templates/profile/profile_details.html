@@ -8,17 +8,27 @@
         <h1 class="display-4" style="color: chartreuse">Profile Details</h1>
         <div class="text-center" style="margin: 3% 5%; padding: 5% 5%; background-color: chartreuse">
             <div class="absolute">
-               <div >
-            {% if user.profile.image %}
-                <img src="{{ user.profile.image.url }}" alt="image">
-            {% else %}
-                <img src="{% static 'images/generic_woman_profile_image.png' %}" alt="profile image">
-            {% endif %}
-            </div>
+                <div>
+                    {% if profile.image %}
+                        <img src="{{ profile.image.url }}" alt="image">
+                    {% else %}
+                        {% if profile.gender == "Female" %}
+                            <img class="rounded-circle mb-3" src="{% static 'images/generic_woman_profile_image.png' %}"
+                                 alt="profile image" width="180" height="180">
+                        {% else %}
+                            <img class="rounded-circle mb-3" src="{% static 'images/generic_man_profile_image.png' %}"
+                                 alt="profile image">
+                        {% endif %}
 
+                    {% endif %}
+                </div>
+                <h3>{{ profile.first_name }} {{ profile.last_name }}</h3>
+                <h3>{{ profile.address }} {{ profile.city }}</h3>
+                <h3>{{ profile.number_of_children }} </h3>
+                <h3>{{ profile.gender }} </h3>
+            </div>
+            <hr>
         </div>
-        <hr>
-    </div>
     </div>
 
 {% endblock %}

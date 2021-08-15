@@ -5,6 +5,14 @@ UserModel = get_user_model()
 
 
 class UserProfile(models.Model):
+    TYPE_CHOICE_MALE = 'male'
+    TYPE_CHOICE_FEMALE = 'female'
+
+
+    TYPE_CHOICES = (
+        (TYPE_CHOICE_MALE, 'Male'),
+        (TYPE_CHOICE_FEMALE, 'Female'),
+    )
     first_name = models.CharField(
         max_length=20,
         blank=True,
@@ -29,10 +37,18 @@ class UserProfile(models.Model):
         upload_to='profiles',
         blank=True,
     )
+    gender = models.CharField(
+        max_length=6,
+        choices=TYPE_CHOICES,
+        blank=True,
+    )
     user = models.OneToOneField(
         UserModel,
         on_delete=models.CASCADE,
         primary_key=True,
+    )
+    is_complete = models.BooleanField(
+        default=False,
     )
 
 

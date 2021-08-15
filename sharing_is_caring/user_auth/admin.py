@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.contrib.auth import get_user_model
 
+from sharing_is_caring.profiles.models import UserProfile
+
 UserModel = get_user_model()
 
 
@@ -14,7 +16,7 @@ class SharingIsCaringUserAdmin(admin.ModelAdmin):
         ('Permissions', {
             'fields': ('is_staff', 'is_superuser', 'groups', 'user_permissions'),
         }),
-        ('Important dates', {'fields': ('last_login', 'date_joined')}),
+        ('Important dates', {'fields': ('last_login',)}),
     )
     add_fieldsets = (
         (None, {
@@ -23,3 +25,8 @@ class SharingIsCaringUserAdmin(admin.ModelAdmin):
         }),
     )
     # readonly_fields = ('date_joined',)
+
+
+@admin.register(UserProfile)
+class UserProfileAdmin(admin.ModelAdmin):
+    list_display = ('first_name', 'gender', 'user')
