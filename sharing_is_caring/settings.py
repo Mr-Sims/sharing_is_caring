@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'sharing_is_caring.user_auth',
     'sharing_is_caring.profiles',
     'sharing_is_caring.common',
+    'sharing_is_caring.main_content'
 ]
 
 MIDDLEWARE = [

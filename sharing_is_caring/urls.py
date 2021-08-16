@@ -9,6 +9,6 @@ urlpatterns = [
     path('', include('sharing_is_caring.common.urls')),
     path('auth/', include('sharing_is_caring.user_auth.urls')),
     path('profiles/', include('sharing_is_caring.profiles.urls')),
-
+    path('main/', include('sharing_is_caring.main_content.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

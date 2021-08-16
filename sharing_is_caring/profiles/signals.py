@@ -18,11 +18,12 @@ def user_created(sender, instance, created, **kwargs):
 
 @receiver(pre_save, sender=UserProfile)
 def check_profile_complete(sender, instance: UserProfile, **kwargs):
-    if instance.address and \
-            instance.first_name and \
+    if instance.first_name and \
             instance.last_name and \
+            instance.address and \
             instance.city and\
-            instance.gender and instance.number_of_children:
+            instance.number_of_children and \
+            instance.gender :
 
         instance.is_complete = True
         return

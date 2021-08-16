@@ -1,6 +1,7 @@
 {% extends 'shared/base.html' %}
 
-{% block title %}- Sign in{% endblock %}
+{% block title %}- Sign In{% endblock %}
+
 {% block body %}
     <div class="container-fluid" style="background-image: none">
         <div class="row">
@@ -12,7 +13,7 @@
                     <p></p>
                     {% csrf_token %}
                     {{ form }}
-                    <button class="btn btn-primary center">Sign In</button>
+                    <button class="btn btn-success">Sign In</button>
                 </form>
             </div>
         </div>

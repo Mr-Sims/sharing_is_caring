@@ -4,17 +4,24 @@
 
 {% block body %}
     <div class="container" style="background-color: chartreuse">
-    {% if user.is_authenticated %}
-        {% profile_complete_notification %}
-        <h1 class="display-4">Welcome {{ user.email}}</h1>
 
+        {% if user.is_authenticated %}
+            {% if not profile.is_complete %}
+                {% profile_complete_notification %}
+            {% endif %}
+
+            {% if profile.first_name %}
+                <h1 class="display-4">Welcome {{ profile.first_name }}</h1>
+            {% else %}
+                <h1 class="display-4">Welcome {{ user.email }}</h1>
+            {% endif %}
         {% else %}
-    <h1 class="display-4">Welcome to Sharing is Caring</h1>
+            <h1 class="display-4">Welcome to Sharing is Caring</h1>
         {% endif %}
+
         <div class="jumbotron parent" style="background-color: green">
             <img style="width: 100%"
-                 src="{% static 'images/index_background.png' %}" alt="">
-
+                 src="{% static 'images/index_background.png' %}" alt="background image failed to load">
         </div>
         <hr>
     </div>

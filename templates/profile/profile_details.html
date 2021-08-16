@@ -5,30 +5,45 @@
 
 {% block body %}
     <div class="container" style="background-color: green">
-        <h1 class="display-4" style="color: chartreuse">Profile Details</h1>
+        <h1 class="display-4" style="color: chartreuse">Profile Details - {{ user.email }}</h1>
         <div class="text-center" style="margin: 3% 5%; padding: 5% 5%; background-color: chartreuse">
             <div class="absolute">
                 <div>
                     {% if profile.image %}
-                        <img src="{{ profile.image.url }}" alt="image">
+                        <img class="rounded-circle mb-4" src="{{ profile.image.url }}" alt="image" width="150"
+                             height="150">
                     {% else %}
-                        {% if profile.gender == "Female" %}
+                        {% if profile.gender == "female" %}
                             <img class="rounded-circle mb-3" src="{% static 'images/generic_woman_profile_image.png' %}"
-                                 alt="profile image" width="180" height="180">
-                        {% else %}
-                            <img class="rounded-circle mb-3" src="{% static 'images/generic_man_profile_image.png' %}"
-                                 alt="profile image">
+                                 alt="profile image woman" width="150" height="150">
                         {% endif %}
-
+                        {% if profile.gender == "male" %}
+                            <img class="rounded-circle mb-3" src="{% static 'images/generic_man_profile_image.jpg' %}"
+                                 alt="profile image man" width="150" height="150">
+                        {% endif %}
                     {% endif %}
                 </div>
-                <h3>{{ profile.first_name }} {{ profile.last_name }}</h3>
-                <h3>{{ profile.address }} {{ profile.city }}</h3>
-                <h3>{{ profile.number_of_children }} </h3>
-                <h3>{{ profile.gender }} </h3>
             </div>
-            <hr>
+            {% if profile.gender == 'female' %}
+                <div>
+                    <h3>Name: Mrs: {{ profile.first_name }} {{ profile.last_name }}</h3>
+                    <h3>Address: {{ profile.address }} {{ profile.city }}</h3>
+                    <h3>Children: {{ profile.number_of_children }} </h3>
+                </div>
+            {% else %}
+                <div>
+                    <h4>Name: Mr. {{ profile.first_name }} {{ profile.last_name }}</h4>
+                    <h4>Address: {{ profile.address }}, {{ profile.city }}</h4>
+                    <h4>Children: {{ profile.number_of_children }} </h4>
+                </div>
+            {% endif %}
+        {% if request.user.id == profile.user_id %}
+            <div class="container">
+                <a href="{% url 'edit profile' user.id %}" class="btn btn-success">Edit Profile</a>
+            </div>
+        {% endif %}
         </div>
+        <hr>
     </div>
 
 {% endblock %}
