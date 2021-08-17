@@ -1,0 +1,46 @@
+{% extends 'shared/base.html' %}
+
+{% block title %}
+    - Post Details
+{% endblock %}
+
+{% block body %}
+
+    <div class="container" style="background-color: green; width: 1100px">
+        <hr>
+        <div class="d-flex" style="background-color: chartreuse">
+            <div class="d-inline p-2 w-50">
+                <img src="{{ post.image.url }}" class="w-50 rounded mx-auto d-block">
+            </div>
+            <div class="d-inline p-2 w-25">
+                <div class="d-flex justify-content-between">
+                    <h6 class="card-title">{{ post.item_type }}</h6>
+                    <h6 class="card-title">{{ post.name }}</h6>
+                    {% if is_owner %}
+                        <div>
+                            <a href="{% url 'update post' post.id %}" class="btn btn-success">Update</a>
+                        </div>
+                    {% else %}
+                            <a href="{% url 'foreign profile details' post.user_id %}" class="btn btn-success">Poster Details</a>
+                    {% endif %}
+
+                </div>
+                <hr>
+                <div class="d-flex justify-content-between">
+                    <p class="card-text">{{ post.condition }}</p>
+                    <h5 class="card-title">{{ post.type }}</h5>
+                    {% if is_owner %}
+                        <div>
+                            <a href="{% url 'delete post' post.user.id %}" class="btn btn-danger">Delete</a>
+                        </div>
+                    {% endif %}
+                </div>
+                <hr>
+                <p class="mt-2">{{ post.description }}</p>
+                {% if is_owner %}
+                {% endif %}
+            </div>
+        </div>
+        <hr>
+    </div>
+{% endblock %}

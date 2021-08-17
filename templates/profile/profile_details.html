@@ -1,6 +1,5 @@
 {% extends 'shared/base.html' %}
 {% load static %}
-
 {% block title %}- Profile Details{% endblock %}
 
 {% block body %}
@@ -35,6 +34,7 @@
                     <h4>Name: Mr. {{ profile.first_name }} {{ profile.last_name }}</h4>
                     <h4>Address: {{ profile.address }}, {{ profile.city }}</h4>
                     <h4>Children: {{ profile.number_of_children }} </h4>
+                    <h4>Email:  </h4>
                 </div>
             {% endif %}
         {% if request.user.id == profile.user_id %}
@@ -45,5 +45,49 @@
         </div>
         <hr>
     </div>
+    {% if posts %}
+        <div class="container">
+        <h1 class='text-center'>All posted items</h1>
+        <div class="row">
+            {% for post in posts %}
 
+                <div class="col-md-3">
+                    <div class="card" style="width: 15rem; height: 25rem; background-color: rgba(236,255,0,0.24)">
+                        <img style="width: 190px; height: 155px" src="{{ post.image.url }}" class="card-img-top" alt="item image failed to load">
+                        <div class="card-body">
+                            <h6 class="card-title">{{ post.type }}</h6>
+                            <h5 class="card-title">{{ post.name }}</h5>
+                            <h6 class="card-title">{{ post.condition }}</h6>
+                            <a href="{% url 'post details' post.id %}" class="btn btn-success">See details</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% else %}
+        {% if profile.is_complete %}
+        <div class="text-center">
+            <h2>You have no posts</h2>
+            <a href="{% url 'add post' %}" class="btn btn-success">Create New Post</a>
+        </div>
+            {% endif %}
+    {% endif %}
+        <div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+    </div>
 {% endblock %}

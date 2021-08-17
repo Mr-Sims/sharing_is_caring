@@ -1,0 +1,92 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+{% block title %}- Profile Details{% endblock %}
+
+{% block body %}
+    <div class="container" style="background-color: green">
+        <h1 class="display-4" style="color: chartreuse">Profile Details
+            - {{ profile.first_name }} {{ profile.last_name }}</h1>
+        <div class="text-center" style="margin: 3% 5%; padding: 5% 5%; background-color: chartreuse">
+            <div class="absolute">
+                <div>
+                    {% if profile.image %}
+                        <img class="rounded-circle mb-4" src="{{ profile.image.url }}" alt="image" width="150"
+                             height="150">
+                    {% else %}
+                        {% if profile.gender == "female" %}
+                            <img class="rounded-circle mb-3" src="{% static 'images/generic_woman_profile_image.png' %}"
+                                 alt="profile image woman" width="150" height="150">
+                        {% endif %}
+                        {% if profile.gender == "male" %}
+                            <img class="rounded-circle mb-3" src="{% static 'images/generic_man_profile_image.jpg' %}"
+                                 alt="profile image man" width="150" height="150">
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+            <div>
+                {% if profile.gender == 'female' %}
+                    <h3>Name: Mrs: {{ profile.first_name }} {{ profile.last_name }}</h3>
+                {% else %}
+                    <h4>Name: Mr. {{ profile.first_name }} {{ profile.last_name }}</h4>
+                {% endif %}
+                <h4>Address: {{ profile.address }}, {{ profile.city }}</h4>
+                <h4>Children: {{ profile.number_of_children }} </h4>
+{#            <a href="{% url 'foreign profile posts' %}" class="btn btn-success">See User posts</a>#}
+                <h4>Email: {{ usermodel.email }} </h4>
+            </div>
+            {% if request.user.id == profile.user_id %}
+                <div class="container">
+                    <a href="{% url 'edit profile' user.id %}" class="btn btn-success">Edit Profile</a>
+                </div>
+            {% endif %}
+        </div>
+        <hr>
+    </div>
+    {% if posts %}
+        <div class="container">
+            <h1 class='text-center'>All posted items</h1>
+            <div class="row">
+                {% for post in posts %}
+
+                    <div class="col-md-3">
+                        <div class="card" style="width: 15rem; height: 25rem; background-color: rgba(236,255,0,0.24)">
+                            <img style="width: 190px; height: 155px" src="{{ post.image.url }}" class="card-img-top"
+                                 alt="item image failed to load">
+                            <div class="card-body">
+                                <h6 class="card-title">{{ post.type }}</h6>
+                                <h5 class="card-title">{{ post.name }}</h5>
+                                <h6 class="card-title">{{ post.condition }}</h6>
+                                <a href="{% url 'post details' post.id %}" class="btn btn-success">See details</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% else %}
+        {% if profile.is_complete %}
+            <div class="text-center">
+                <h2>You have no posts</h2>
+                <a href="{% url 'add post' %}" class="btn btn-success">Create New Post</a>
+            </div>
+        {% endif %}
+    {% endif %}
+    <div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+    </div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'shared/base.html' %}
+
+{% block title %}
+    - Update Post
+{% endblock %}
+
+{% block body %}
+    <div class="container" style="background-color: green">
+        <h1 class="display-4" style="color: chartreuse">Create New Post</h1>
+        <div class="text-center" style="margin: 3% 5%; padding: 5% 5%; background-color: chartreuse">
+            <div class="absolute">
+                <form action="{% url 'update post' post.id %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form }}
+                    <button class="btn btn-success" type="submit">Update</button>
+                </form>
+            </div>
+        </div>
+        <hr>
+    </div>
+
+{% endblock %}

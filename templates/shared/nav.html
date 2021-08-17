@@ -10,15 +10,12 @@
         <ul class="navbar-nav">
             <a class="navbar-brand fs-4" href="{% url 'index' %}">
                 <img src="{% static 'images/teddy.png' %}" alt="" height="35" class="d-inline-block align-text-top"></a>
-                <li><a class="nav-link" href="{% url 'list items' %}">All posts</a></li>
+            <li><a class="nav-link" href="{% url 'list items' %}">All posts</a></li>
             {% if request.user.is_authenticated %}
-
-{#                {% if profile.is_complete %}#}
-                    <li><a class="nav-link" href="{% url 'profile details' user.id %}">Profile details</a></li>
-{#                {% else %}#}
-{#                    <li><a class="nav-link" href="{% url 'edit profile' user.id %}">Edit Profile</a></li>#}
-{#                {% endif %}#}
-
+                {% if profile.is_complete %}
+                    <li><a class="nav-link" href="{% url 'add post' %}">Add New Post</a></li>
+                {% endif %}
+                <li><a class="nav-link" href="{% url 'profile details' user.id %}">Profile details</a></li>
                 <li><a class="nav-link" href="{% url 'sign out' %}">Sign out</a></li>
             {% else %}
                 <li><a class="nav-link" href="{% url 'sign up' %}">Sign up</a></li>
