@@ -32,7 +32,9 @@
                 {% endif %}
                 <h4>Address: {{ profile.address }}, {{ profile.city }}</h4>
                 <h4>Children: {{ profile.number_of_children }} </h4>
-{#            <a href="{% url 'foreign profile posts' %}" class="btn btn-success">See User posts</a>#}
+            {{ profile.user_id }}
+
+                {#            <a href="{% url 'foreign profile posts' %}" class="btn btn-success">See User posts</a>#}
                 <h4>Email: {{ usermodel.email }} </h4>
             </div>
             {% if request.user.id == profile.user_id %}
@@ -43,6 +45,33 @@
         </div>
         <hr>
     </div>
+
+    <div>
+        <div class="d-block" style="background-color: chartreuse; padding:2%">
+            {% if comments %}
+                {% for comment in comments %}
+                    <div class="box">
+                        <h5><u>{{ comment.user }}:</u> <em>{{ comment.comment }}</em></h5>
+                        <hr>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="box">
+                    <h3>There are no comments for this user. </h3>
+                </div>
+            {% endif %}
+            {% if not is_owner %}
+                <div class="box">
+                    <form method="post" action="{% url 'comment profile' profile.user_id %}">
+                        {% csrf_token %}
+                        {{ comment_form }}
+                        <button class="btn btn-success" type="submit">Add comment</button>
+                    </form>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
     {% if posts %}
         <div class="container">
             <h1 class='text-center'>All posted items</h1>

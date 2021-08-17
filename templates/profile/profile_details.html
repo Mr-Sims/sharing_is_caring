@@ -45,6 +45,20 @@
         </div>
         <hr>
     </div>
+    <div class="d-block" style="background-color: chartreuse; padding:2%">
+            {% if comments %}
+                {% for comment in comments %}
+                    <div class="box">
+                        <h5><u>{{ comment.user }}:</u> <em>{{ comment.comment }}</em></h5>
+                        <hr>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="box">
+                    <h3>There are no comments for this user. </h3>
+                </div>
+            {% endif %}
+    </div>
     {% if posts %}
         <div class="container">
         <h1 class='text-center'>All posted items</h1>

@@ -21,7 +21,8 @@
                             <a href="{% url 'update post' post.id %}" class="btn btn-success">Update</a>
                         </div>
                     {% else %}
-                            <a href="{% url 'foreign profile details' post.user_id %}" class="btn btn-success">Poster Details</a>
+                        <a href="{% url 'foreign profile details' post.user_id %}" class="btn btn-success">Poster
+                            Details</a>
                     {% endif %}
 
                 </div>
@@ -31,7 +32,7 @@
                     <h5 class="card-title">{{ post.type }}</h5>
                     {% if is_owner %}
                         <div>
-                            <a href="{% url 'delete post' post.user.id %}" class="btn btn-danger">Delete</a>
+                            <a href="{% url 'delete post' post.id %}" class="btn btn-danger">Delete</a>
                         </div>
                     {% endif %}
                 </div>
