@@ -1,0 +1,16 @@
+{% load static %}
+<div>
+    {% if profile.image %}
+        <img class="img-thumbnail" style="width: 35%; height: auto" src="{{ profile.image.url }}" alt="image" width="150"
+             height="150">
+    {% else %}
+        {% if profile.gender == "female" %}
+            <img class="rounded-circle mb-3" src="{% static 'images/generic_woman_profile_image.png' %}"
+                 alt="profile image woman" width="150" height="150">
+        {% endif %}
+        {% if profile.gender == "male" %}
+            <img class="rounded-circle mb-3" src="{% static 'images/generic_man_profile_image.jpg' %}"
+                 alt="profile image man" width="150" height="150">
+        {% endif %}
+    {% endif %}
+</div>

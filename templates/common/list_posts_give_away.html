@@ -8,38 +8,13 @@
     <div class="container">
         <h1 class='text-center'>Give-Away Items</h1>
         <div class="row">
-            {% for item in posts %}
-                <div class="col-md-3">
-                    <div class="card" style="width: 15rem; height: 25rem; background-color: rgba(236,255,0,0.24)">
-                        <img style="width: 190px; height: 155px;" src="{{ item.image.url }}" class="card-img-top"
-                             alt="item image failed to load">
-                        <div class="card-body">
-                            <h6 class="card-title">{{ item.type }}</h6>
-                            <h5 class="card-title">{{ item.name }}</h5>
-                            <h6 class="card-title">{{ item.condition }}</h6>
-                            <a href="{% url 'post details' item.id %}" class="btn btn-success">See details</a>
-                        </div>
-                    </div>
-                </div>
+            {% for post in posts %}
+
+                {% include 'shared/post_card.html' %}
+
             {% endfor %}
         </div>
     </div>
 
-    <div class="pagination">
-    <span class="step-links">
-        {% if page_obj.has_previous %}
-            <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-        {% endif %}
-
-        <span class="current">
-            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-        </span>
-
-        {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">next</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-        {% endif %}
-    </span>
-    </div>
+    {% include 'shared/pagination.html' %}
 {% endblock %}

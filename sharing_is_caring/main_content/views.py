@@ -13,7 +13,6 @@ class PostDetailsView(LoginRequiredMixin, DetailView):
     template_name = 'main_content/post_details.html'
     context_object_name = 'post'
     login_url = reverse_lazy('sign in')
-    # redirect_field_name = 'redirect_to'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

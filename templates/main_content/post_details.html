@@ -8,14 +8,19 @@
 
     <div class="container" style="background-color: green; width: 1100px">
         <hr>
-        <div class="d-flex" style="background-color: chartreuse">
+{#        <div class="d-flex" style="background-color: chartreuse">#}
+        <div class="jumbotron parent" style="margin: 3% 5%; padding: 5% 5%; background-color: chartreuse">
             <div class="d-inline p-2 w-50">
-                <img src="{{ post.image.url }}" class="w-50 rounded mx-auto d-block">
+                <img src="{{ post.image.url }}" class="rounded mx-auto d-block" style="width: 50%; height: auto">
             </div>
-            <div class="d-inline p-2 w-25">
+            <div class="d-inline p-2 w-50">
+
                 <div class="d-flex justify-content-between">
-                    <h6 class="card-title">{{ post.item_type }}</h6>
-                    <h6 class="card-title">{{ post.name }}</h6>
+                    <h6 class="card-title">Item Type <b><em>{{ post.item_type }}</em></b></h6>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <h6 class="card-title">Item Name <b><em>{{ post.name }}</em></b></h6>
                     {% if is_owner %}
                         <div>
                             <a href="{% url 'update post' post.id %}" class="btn btn-success">Update</a>
@@ -28,8 +33,11 @@
                 </div>
                 <hr>
                 <div class="d-flex justify-content-between">
-                    <p class="card-text">{{ post.condition }}</p>
-                    <h5 class="card-title">{{ post.type }}</h5>
+                    <h6 class="card-text">Item Condition <b><em>{{ post.condition }}</em></b></h6>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <h6 class="card-title">Post Type <b><em>{{ post.type }}</em></b></h6>
                     {% if is_owner %}
                         <div>
                             <a href="{% url 'delete post' post.id %}" class="btn btn-danger">Delete</a>
@@ -37,7 +45,8 @@
                     {% endif %}
                 </div>
                 <hr>
-                <p class="mt-2">{{ post.description }}</p>
+                <h6>Description</h6>
+                <p class="mt-2"><b>{{ post.description }}</b></p>
                 {% if is_owner %}
                 {% endif %}
             </div>

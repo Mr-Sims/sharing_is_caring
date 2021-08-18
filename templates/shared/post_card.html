@@ -1,0 +1,13 @@
+<div class="col-md-3">
+    <div class="card" style="width: 15rem; height: 25rem; background-color: rgba(236,255,0,0.24)">
+{#        <img style="width: 190px; height: 155px" src="{{ post.image.url }}" class="card-img-top"#}
+        <img style="width: 100%; height: auto" src="{{ post.image.url }}" class="img-thumbnail"
+             alt="item image failed to load">
+        <div class="card-body">
+            <h6 class="card-title">{{ post.type }}</h6>
+            <h5 class="card-title">{{ post.name }}</h5>
+            <h6 class="card-title">{{ post.condition }}</h6>
+            <a href="{% url 'post details' post.id %}" class="btn btn-success">See details</a>
+        </div>
+    </div>
+</div>

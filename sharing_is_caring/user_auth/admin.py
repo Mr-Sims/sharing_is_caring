@@ -24,7 +24,7 @@ class SharingIsCaringUserAdmin(admin.ModelAdmin):
             'fields': ('email', 'password1', 'password2'),
         }),
     )
-    # readonly_fields = ('date_joined',)
+
 
 
 @admin.register(UserProfile)

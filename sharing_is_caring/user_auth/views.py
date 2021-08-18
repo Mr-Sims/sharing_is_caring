@@ -1,5 +1,5 @@
 from django.contrib.auth import get_user_model, logout, login
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
@@ -28,6 +28,5 @@ class SignInView(BootstrapFormViewMixin, LoginView):
     template_name = 'auth/sign-in.html'
 
 
-def sign_out_user(request):
-    logout(request)
-    return redirect('index')
+class SignOutView(LogoutView):
+    next_page = reverse_lazy('index')

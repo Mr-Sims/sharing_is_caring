@@ -8,40 +8,20 @@
             - {{ profile.first_name }} {{ profile.last_name }}</h1>
         <div class="text-center" style="margin: 3% 5%; padding: 5% 5%; background-color: chartreuse">
             <div class="absolute">
-                <div>
-                    {% if profile.image %}
-                        <img class="rounded-circle mb-4" src="{{ profile.image.url }}" alt="image" width="150"
-                             height="150">
-                    {% else %}
-                        {% if profile.gender == "female" %}
-                            <img class="rounded-circle mb-3" src="{% static 'images/generic_woman_profile_image.png' %}"
-                                 alt="profile image woman" width="150" height="150">
-                        {% endif %}
-                        {% if profile.gender == "male" %}
-                            <img class="rounded-circle mb-3" src="{% static 'images/generic_man_profile_image.jpg' %}"
-                                 alt="profile image man" width="150" height="150">
-                        {% endif %}
-                    {% endif %}
-                </div>
+
+                {% include 'shared/profile_image.html' %}
+
             </div>
             <div>
                 {% if profile.gender == 'female' %}
-                    <h3>Name: Mrs: {{ profile.first_name }} {{ profile.last_name }}</h3>
+                    <h3>Name: Mrs: <b><em>{{ profile.first_name }} {{ profile.last_name }}</em></b></h3>
                 {% else %}
-                    <h4>Name: Mr. {{ profile.first_name }} {{ profile.last_name }}</h4>
+                    <h4>Name: Mr. <b><em>{{ profile.first_name }} {{ profile.last_name }}</em></b></h4>
                 {% endif %}
-                <h4>Address: {{ profile.address }}, {{ profile.city }}</h4>
-                <h4>Children: {{ profile.number_of_children }} </h4>
-            {{ profile.user_id }}
-
-                {#            <a href="{% url 'foreign profile posts' %}" class="btn btn-success">See User posts</a>#}
-                <h4>Email: {{ usermodel.email }} </h4>
+                <h4>Address: <b><em>{{ profile.address }}, {{ profile.city }}</em></b></h4>
+                <h4>Children: <b><em>{{ profile.number_of_children }}</em></b> </h4>
+                <h4>Email: <b><em>{{ usermodel.email }}</em></b> </h4>
             </div>
-            {% if request.user.id == profile.user_id %}
-                <div class="container">
-                    <a href="{% url 'edit profile' user.id %}" class="btn btn-success">Edit Profile</a>
-                </div>
-            {% endif %}
         </div>
         <hr>
     </div>
@@ -51,7 +31,7 @@
             {% if comments %}
                 {% for comment in comments %}
                     <div class="box">
-                        <h5><u>{{ comment.user }}:</u> <em>{{ comment.comment }}</em></h5>
+                        <h5>{{ comment.user }}:  <em>{{ comment.comment }}</em></h5>
                         <hr>
                     </div>
                 {% endfor %}
@@ -60,7 +40,6 @@
                     <h3>There are no comments for this user. </h3>
                 </div>
             {% endif %}
-            {% if not is_owner %}
                 <div class="box">
                     <form method="post" action="{% url 'comment profile' profile.user_id %}">
                         {% csrf_token %}
@@ -68,8 +47,7 @@
                         <button class="btn btn-success" type="submit">Add comment</button>
                     </form>
                 </div>
-            {% endif %}
-        </div>
+           </div>
     </div>
 
     {% if posts %}
@@ -78,18 +56,8 @@
             <div class="row">
                 {% for post in posts %}
 
-                    <div class="col-md-3">
-                        <div class="card" style="width: 15rem; height: 25rem; background-color: rgba(236,255,0,0.24)">
-                            <img style="width: 190px; height: 155px" src="{{ post.image.url }}" class="card-img-top"
-                                 alt="item image failed to load">
-                            <div class="card-body">
-                                <h6 class="card-title">{{ post.type }}</h6>
-                                <h5 class="card-title">{{ post.name }}</h5>
-                                <h6 class="card-title">{{ post.condition }}</h6>
-                                <a href="{% url 'post details' post.id %}" class="btn btn-success">See details</a>
-                            </div>
-                        </div>
-                    </div>
+                    {% include 'shared/post_card.html' %}
+
                 {% endfor %}
             </div>
         </div>
@@ -101,21 +69,7 @@
             </div>
         {% endif %}
     {% endif %}
-    <div class="pagination">
-    <span class="step-links">
-        {% if page_obj.has_previous %}
-            <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-        {% endif %}
 
-        <span class="current">
-            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-        </span>
+    {% include 'shared/pagination.html' %}
 
-        {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">next</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-        {% endif %}
-    </span>
-    </div>
 {% endblock %}
