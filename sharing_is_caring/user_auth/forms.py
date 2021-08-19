@@ -9,5 +9,6 @@ class SignUpForm(UserCreationForm):
         model = UserModel
         fields = ("email",)
 
-class LoginFormTrue(AuthenticationForm):
+
+class LoginForm(AuthenticationForm):
     pass

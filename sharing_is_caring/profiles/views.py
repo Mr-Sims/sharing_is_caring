@@ -15,7 +15,7 @@ from sharing_is_caring.profiles.models import UserProfile
 UserModel = get_user_model()
 
 
-class UserProfileDetailsView(ListView):
+class UserProfileDetailsView(LoginRequiredMixin,ListView):
     model = UserProfile
     template_name = 'profile/profile_details.html'
     paginate_by = 4
@@ -28,7 +28,7 @@ class UserProfileDetailsView(ListView):
         return context
 
 
-class EditProfileView(BootstrapFormViewMixin, UpdateView):
+class EditProfileView(BootstrapFormViewMixin, LoginRequiredMixin, UpdateView):
     model = UserProfile
     form_class = UserProfileForm
     template_name = 'profile/edit_profile.html'
@@ -36,7 +36,7 @@ class EditProfileView(BootstrapFormViewMixin, UpdateView):
 
 
 @login_required()
-def profile_details(request, pk):
+def foreign_profile_details(request, pk):
     usermodel = UserModel.objects.get(pk=pk)
     posts = Post.objects.filter(user_id=usermodel.id)
     profile = UserProfile.objects.get(user_id=usermodel.id)
@@ -55,8 +55,8 @@ def profile_details(request, pk):
     return render(request, 'profile/foreign_profile_details.html', context)
 
 
-class PostOnlyView(View):
-    form_class = None
+class CommentProfileView(LoginRequiredMixin, View):
+    form_class = CommentForm
 
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
@@ -64,16 +64,6 @@ class PostOnlyView(View):
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
-
-    def form_valid(self, form):
-        pass
-
-    def form_invalid(self, form):
-        pass
-
-
-class CommentProfileView(LoginRequiredMixin, PostOnlyView):
-    form_class = CommentForm
 
     def form_valid(self, form):
         user_to_be_commented = UserProfile.objects.get(pk=self.kwargs['pk'])

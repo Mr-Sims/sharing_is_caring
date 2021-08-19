@@ -1,6 +1,6 @@
 from pathlib import Path
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+
 from django.conf.global_settings import LOGIN_REDIRECT_URL
 from django.urls import reverse_lazy
 
@@ -131,3 +131,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'user_auth.SharingIsCaringUser'
 
 LOGIN_REDIRECT_URL = reverse_lazy('index')
+
