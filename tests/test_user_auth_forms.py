@@ -9,8 +9,8 @@ class SighUpTest(TestCase):
     def test_whenPasswordsDoesMatch_expectNoting(self):
         user_form = SignUpForm(
             {'email': 'test@abv.bg',
-             'password1': '1234',
-             'password2': '1234'
+             'password1': 'Maznaparola1234',
+             'password2': 'Maznaparola1234'
              }
         )
         self.assertTrue(user_form.is_valid())
@@ -27,8 +27,8 @@ class SighUpTest(TestCase):
     def test_whenEmailIsValid_expectNoting(self):
         user_form = SignUpForm(
             {'email': 'test@abv.bg',
-             'password1': '1234',
-             'password2': '1234',
+             'password1': 'Maznaparola1234',
+             'password2': 'Maznaparola1234',
              }
         )
         self.assertTrue(user_form.is_valid())
@@ -56,8 +56,8 @@ class SighUpTest(TestCase):
     def test_whenUser_withValidEmailAndPasswords(self):
         user_form = SignUpForm(
             {'email': 'test@abv.bg',
-             'password1': '1234',
-             'password2': '1234',
+             'password1': 'Maznaparola1234',
+             'password2': 'Maznaparola1234',
              }
         )
         self.assertTrue(user_form.is_valid())

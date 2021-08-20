@@ -1,13 +1,13 @@
 from django.contrib.auth import get_user_model
+from django.core.validators import RegexValidator
 from django.db import models
 
 UserModel = get_user_model()
-
+letters_validator = RegexValidator(r'^[a-zA-Z]*$', 'Only letters allowed')
 
 class UserProfile(models.Model):
     TYPE_CHOICE_MALE = 'male'
     TYPE_CHOICE_FEMALE = 'female'
-
 
     TYPE_CHOICES = (
         (TYPE_CHOICE_MALE, 'Male'),
@@ -16,10 +16,12 @@ class UserProfile(models.Model):
     first_name = models.CharField(
         max_length=20,
         blank=True,
+        validators=[letters_validator],
     )
     last_name = models.CharField(
         max_length=20,
         blank=True,
+        validators=[letters_validator],
     )
     address = models.CharField(
         max_length=30,
@@ -28,6 +30,7 @@ class UserProfile(models.Model):
     city = models.CharField(
         max_length=30,
         blank=True,
+        validators=[letters_validator],
     )
     number_of_children = models.PositiveIntegerField(
         blank=True,

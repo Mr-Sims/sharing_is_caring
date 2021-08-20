@@ -8,7 +8,7 @@
 
     <div class="container" style="background-color: green; width: 1100px">
         <hr>
-{#        <div class="d-flex" style="background-color: chartreuse">#}
+        {#        <div class="d-flex" style="background-color: chartreuse">#}
         <div class="jumbotron parent" style="margin: 3% 5%; padding: 5% 5%; background-color: chartreuse">
             <div class="d-inline p-2 w-50">
                 <img src="{{ post.image.url }}" class="rounded mx-auto d-block" style="width: 50%; height: auto">
@@ -26,10 +26,14 @@
                             <a href="{% url 'update post' post.id %}" class="btn btn-success">Update</a>
                         </div>
                     {% else %}
-                        <a href="{% url 'foreign profile details' post.user_id %}" class="btn btn-success">Poster
-                            Details</a>
+                        {% if profile.is_complete == True %}
+                            <a href="{% url 'foreign profile details' post.user_id %}" class="btn btn-success">Poster
+                                Details</a>
+                        {% else %}
+                            <h6>If you want to see the post-owner details, you must first<a
+                                    href="{% url 'edit profile' user.id %}">complete your profile</a></h6>
+                        {% endif %}
                     {% endif %}
-
                 </div>
                 <hr>
                 <div class="d-flex justify-content-between">

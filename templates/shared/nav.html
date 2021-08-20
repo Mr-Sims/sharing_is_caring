@@ -11,6 +11,7 @@
             <a class="navbar-brand fs-4" href="{% url 'index' %}">
                 <img src="{% static 'images/teddy.png' %}" alt="" height="35" class="d-inline-block align-text-top"></a>
             <li><a class="nav-link" href="{% url 'list items' %}">All posts</a></li>
+
             {% if request.user.is_authenticated %}
                 {% if profile.is_complete %}
                     <li><a class="nav-link" href="{% url 'add post' %}">Add New Post</a></li>

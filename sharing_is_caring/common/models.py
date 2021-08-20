@@ -7,7 +7,9 @@ UserModel = get_user_model()
 
 
 class Comment(models.Model):
-    comment = models.TextField()
+    comment = models.TextField(
+        max_length=200,
+    )
 
     user_to_be_commented = models.ForeignKey(
         UserProfile,

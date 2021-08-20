@@ -23,6 +23,12 @@ class ListPostsView(ListView):
     context_object_name = 'posts'
     paginate_by = 8
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if self.request.user.is_authenticated:
+            context['profile'] = UserProfile.objects.get(user_id=self.request.user.id)
+        return context
+
 
 class ListPostsNeededView(ListView):
     model = Post
@@ -32,6 +38,8 @@ class ListPostsNeededView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        if self.request.user.is_authenticated:
+            context['profile'] = UserProfile.objects.get(user_id=self.request.user.id)
         context['posts'] = Post.objects.filter(type="Search")
         return context
 
@@ -44,6 +52,8 @@ class ListPostsGiveAwayView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        if self.request.user.is_authenticated:
+            context['profile'] = UserProfile.objects.get(user_id=self.request.user.id)
         context['posts'] = Post.objects.filter(type="Give-away")
         return context
 

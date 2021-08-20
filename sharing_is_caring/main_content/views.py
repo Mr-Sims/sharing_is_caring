@@ -5,6 +5,7 @@ from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
 from core.mixins import BootstrapFormViewMixin
 from sharing_is_caring.main_content.forms import PostUpdateForm
 from sharing_is_caring.main_content.models import Post
+from sharing_is_caring.profiles.models import UserProfile
 
 
 class PostDetailsView(LoginRequiredMixin, DetailView):
@@ -16,6 +17,10 @@ class PostDetailsView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         post = context['post']
+
+        profile = UserProfile.objects.get(user_id=self.request.user.id)
+        context['profile'] = profile
+
         is_owner = post.user == self.request.user
         context['is_owner'] = is_owner
         return context

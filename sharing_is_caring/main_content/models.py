@@ -1,7 +1,11 @@
 from django.contrib.auth import get_user_model
+from django.core.validators import RegexValidator
 from django.db import models
 
 UserModel = get_user_model()
+
+
+letters_validator = RegexValidator(r'^[a-zA-Z ]*$', 'Only letters allowed')
 
 
 class Post(models.Model):
@@ -35,6 +39,7 @@ class Post(models.Model):
 
     name = models.CharField(
         max_length=30,
+        validators=[letters_validator],
     )
     description = models.TextField()
 
@@ -48,7 +53,7 @@ class Post(models.Model):
     )
     type = models.CharField(
         max_length=9,
-        choices=POST_CHOICES
+        choices=POST_CHOICES,
     )
     image = models.ImageField(
         upload_to='items',
