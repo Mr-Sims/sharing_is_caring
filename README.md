@@ -1,23 +1,33 @@
 Documentation
+
 sharing_is_caring
+
 Simeon Rangelov - MrSims
 
 Table of Contents
+
 1 Introduction
 
 2 Product Overview
 
 2.1 Product Features
+
 2.2 User Characteristics
+
 2.3 Profile objects
+
 2.4 Recipe objects
+
 2.5 Ingredient objects
+
 3 Additional Sevices
 
 3.1 Claudianry
+
 4 Requirements Met
 
 4.1 Mandatory Requirements
+
 4.2 Optional Requirements
 
 
